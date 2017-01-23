@@ -1,0 +1,33 @@
+
+
+<h1>Modulen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nummer:</th>
+      <th>Naam:</th>
+      <th>Breedte:</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.number %></td>
+        <td><%= item.name %></td>
+        <td><%= item.width %> mm</td>
+        <td>
+          <%= link_to page_line_item_path(item.line.page,item.line,item) do %><i class="fi-eye"></i><% end %>
+          <%= link_to edit_page_line_item_path(item.line.page,item.line,item) do %><i class="fi-pencil"></i><% end %>
+          <%= link_to page_line_item_path(item.line.page,item.line,item), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fi-trash"></i><% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nieuwe module', new_page_line_item_path, class: 'button' %>

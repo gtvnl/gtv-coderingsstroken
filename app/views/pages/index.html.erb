@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Paginas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Naam</th>
+      <th>Regels</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.name %></td>
+        <td><%= link_to page.lines.count, page_lines_path(page) %></td>
+        <td>
+
+          <%= link_to page do %><i class="fi-eye"></i><% end %>
+          <%= link_to edit_page_path(page) do %><i class="fi-pencil"></i><% end %>
+          <%= link_to page, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fi-trash"></i><% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nieuwe pagina', new_page_path, class: 'button round' %>

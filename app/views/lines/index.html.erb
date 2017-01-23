@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+<%= content_for :title, "Pagina regels" %>
+<h1>Regels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nummer</th>
+      <th>Modules</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lines.each do |line| %>
+      <tr>
+        <td><%= line.number %></td>
+        <td><%= link_to line.items.count, page_line_items_path(line.page, line) %></td>
+        <td>
+          <%= link_to page_lines_path(line) do %><i class="fi-eye"></i><% end %>
+          <%= link_to edit_page_line_path(line.page, line) do %><i class="fi-pencil"></i><% end %>
+          <%= link_to page_line_path(line.page, line), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fi-trash"></i><% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nieuwe regel', new_page_line_path, class: 'button' %>

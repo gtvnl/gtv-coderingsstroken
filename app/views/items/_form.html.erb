@@ -1,0 +1,19 @@
+<%= simple_form_for(@item, url: "") do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :number, label: 'Nummer' %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :name, label: 'Naam' %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :width, label: 'Breedte (mm)' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,"#{f.object.new_record? ? 'Create' : 'Update'}" %>
+  </div>
+<% end %>

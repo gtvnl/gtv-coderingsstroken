@@ -1,0 +1,6 @@
+<h1>Wijzig module</h1>
+
+<%= render 'form', item: @item %>
+
+<%= link_to 'Show', page_line_item_path(@item.page,@item.line,@item)  %> |
+<%= link_to 'Back', page_line_items_path %>
