@@ -6,7 +6,7 @@ class Item
 
   has_one :page, through: :line
 
-  field :name, default: "Groep"
+  field :title, default: "Groep"
   field :number, default: 1, required: true
 
   field :width, default: 17.5

@@ -3,6 +3,7 @@ class LinesController < ApplicationController
 
   # GET /lines
   def index
+    @page = Page.find(params[:page_id])
     @lines = Line.where(page_id: params[:page_id])
   end
 
@@ -18,6 +19,7 @@ class LinesController < ApplicationController
 
   # GET /lines/1/edit
   def edit
+    @page = Page.find(params[:page_id])
   end
 
   # POST /lines

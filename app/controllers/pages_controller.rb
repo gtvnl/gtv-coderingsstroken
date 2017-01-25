@@ -8,6 +8,8 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   def show
+    @lines = @page.lines
+
   end
 
   # GET /pages/new
@@ -30,12 +32,12 @@ class PagesController < ApplicationController
         line = Line.create(page: @page, number: i + 1)
 
         12.times do |i|
-          item = Item.create(line: line, number: i + 1)
+          item = Item.create(line: line, number: i + 1, title: "Gr.#{i + 1}")
         end
 
       end
 
-      redirect_to @page, notice: 'Pagina aangemaakt.'
+      redirect_to pages_url, notice: 'Pagina aangemaakt.'
     else
       render :new
     end
@@ -43,7 +45,17 @@ class PagesController < ApplicationController
 
   # PATCH/PUT /pages/1
   def update
+    @old_num_of_lines = @page.num_of_lines
     if @page.update(page_params)
+      @new_num_of_lines = params[:page][:num_of_lines]
+
+      if @new_num_of_lines != @old_num_of_lines
+        if @new_num_of_lines > @old_num_of_lines
+          # Add lines
+        elsif @new_num_of_lines < @old_num_of_lines
+          # Delete lines
+        end
+      end
       redirect_to @page, notice: 'Pagina gewijzigd.'
     else
       render :edit
@@ -64,6 +76,6 @@ class PagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def page_params
-      params.require(:page).permit(:name, :num_of_lines)
+      params.require(:page).permit(:title, :num_of_lines)
     end
 end

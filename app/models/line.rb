@@ -10,6 +10,7 @@ class Line
   field :modules
 
   field :num_of_modules, default: 12, required: true
+  field :height, default: 2.15
 
 
 end

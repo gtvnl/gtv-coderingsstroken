@@ -1,9 +1,27 @@
+<% breadcrumb :page, @page %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @page.name %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th colspan="<%= @page.max_cols + 1 %>"><h3><%= link_to @page.title, edit_page_path(@page) %></h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lines.each do |line| %>
+    <tr>
+      <td><%= link_to line.number, edit_page_line_path(@page, line) %></td>
 
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+      <% line.items.each do |item| %>
+        <td><%= link_to item.title,  edit_page_line_item_path(@page, line, item) %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Wijzig', edit_page_path(@page) %> |
+<%= link_to 'Terug', pages_path %> |
+
+<!-- <%= link_to 'Print', 'javascript:print()' %> -->

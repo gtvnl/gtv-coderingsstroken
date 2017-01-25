@@ -1,15 +1,22 @@
-<%= simple_form_for(@line.new_record? ? @line : [@line.page, @line], url: page_lines_path) do |f| %>
+<% breadcrumb :line, @line %>
+
+<%= simple_form_for([@page, @line]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :number, label: 'Nummer', input_html: { value: "#{@page.lines.count + 1}" } %>
+    <%= f.input :number, label: 'Nummer', input_html: { value: "#{@page.lines.count + 1}" } if params[:action] == "new" %>
+    <%= f.input :number, label: 'Nummer' if params[:action] == "edit" %>
   </div>
 
   <div class="form-inputs">
     <%= f.input :num_of_modules, label: 'Aantal modulen' %>
   </div>
 
+  <div class="form-inputs">
+    <%= f.input :height, label: 'Hoogte (mm)' %>
+  </div>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit,"#{f.object.new_record? ? 'Maak Regel' : 'Wijzig Regel'}" %>
   </div>
 <% end %>

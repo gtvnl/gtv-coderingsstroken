@@ -1,3 +1,5 @@
+<% breadcrumb :item, @item %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -6,7 +8,7 @@
 </p>
 <p>
   <strong>Naam:</strong>
-  <%= @item.name %>
+  <%= @item.title %>
 </p>
 
 <%= link_to 'Edit', edit_page_line_item_path(@item.page,@item.line,@item) %> |

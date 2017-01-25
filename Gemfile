@@ -12,6 +12,7 @@ gem 'prawn'
 gem 'simple_form'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
+gem 'gretel'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -37,7 +38,9 @@ group :development do
 end
 
 group :test do
-  gem "simplecov"
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'simplecov'
   gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 

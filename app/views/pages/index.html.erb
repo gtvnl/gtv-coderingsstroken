@@ -1,3 +1,5 @@
+<% breadcrumb :pages, @pages %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Paginas</h1>
@@ -6,15 +8,16 @@
   <thead>
     <tr>
       <th>Naam</th>
-      <th>Regels</th>
-      <th></th>
+      <th>Formaat</th>
+      <th colspan="2">Regels</th>
     </tr>
   </thead>
 
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td><%= page.name %></td>
+        <td><%= page.title %></td>
+        <td><%= page.size %></td>
         <td><%= link_to page.lines.count, page_lines_path(page) %></td>
         <td>
 

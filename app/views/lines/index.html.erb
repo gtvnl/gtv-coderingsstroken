@@ -1,13 +1,17 @@
+<%= content_for :title, "Regels van #{@page.title}" %>
+
+<% breadcrumb :lines, @lines %>
+
 <p id="notice"><%= notice %></p>
-<%= content_for :title, "Pagina regels" %>
-<h1>Regels</h1>
+
+<h1>Regels van <%= @page.title %></h1>
 
 <table>
   <thead>
     <tr>
       <th>Nummer</th>
-      <th>Modules</th>
-      <th></th>
+      <th>Aantal Modulen</th>
+      <th colspan="2">Hoogte</th>
     </tr>
   </thead>
 
@@ -16,6 +20,7 @@
       <tr>
         <td><%= line.number %></td>
         <td><%= link_to line.items.count, page_line_items_path(line.page, line) %></td>
+        <td><%= line.height %> mm</td>
         <td>
           <%= link_to page_lines_path(line) do %><i class="fi-eye"></i><% end %>
           <%= link_to edit_page_line_path(line.page, line) do %><i class="fi-pencil"></i><% end %>
@@ -28,4 +33,4 @@
 
 <br>
 
-<%= link_to 'Nieuwe regel', new_page_line_path, class: 'button' %>
+<%= link_to 'Nieuwe Regel', new_page_line_path, class: 'button' %>
