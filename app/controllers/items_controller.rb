@@ -3,7 +3,8 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = Item.where(line_id: params[:line_id])
+
+    @items = Item.where(line_id: params[:line_id]).order_by(number: :asc)
   end
 
   # GET /items/1
@@ -14,6 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @line = Line.find(params[:line_id])
   end
 
   # GET /items/1/edit
@@ -23,10 +25,12 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
+    @line = Line.find(params[:line_id])
     @item = Item.new(item_params)
+    @item.line = @line
 
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
+      redirect_to page_line_items_url, notice: 'Item was successfully created.'
     else
       render :new
     end
@@ -57,6 +61,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:title, :number, :width, :line_id)
+      params.require(:item).permit(:title, :number, :modulen, :line)
     end
 end

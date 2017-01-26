@@ -7,7 +7,7 @@
     <tr>
       <th>Nummer:</th>
       <th>Naam:</th>
-      <th>Breedte:</th>
+      <th>Aantal Modulen:</th>
       <th></th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= item.number %></td>
         <td><%= item.title %></td>
-        <td><%= item.width %> mm</td>
+        <td><%= item.modulen %></td>
         <td>
           <%= link_to page_line_item_path(item.line.page,item.line,item) do %><i class="fi-eye"></i><% end %>
           <%= link_to edit_page_line_item_path(item.line.page,item.line,item) do %><i class="fi-pencil"></i><% end %>

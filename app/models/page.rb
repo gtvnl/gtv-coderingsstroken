@@ -1,23 +1,18 @@
 class Page
   include NoBrainer::Document
   include NoBrainer::Document::Timestamps
+  include Sizeable
 
   has_many :lines, dependent: :delete
 
+  field :project_number, default: "#{Time.now.year}00"
   field :title, default: 'Pagina 1', required: true
 
-  field :num_of_lines, default: 10, required: true
+  field :num_of_lines, default: 7, required: true
 
 
-  VALID_SIZE = ["A4", "A3"]
-  field :size, :type => String, :in => VALID_SIZE, :default => VALID_SIZE.first
-
-  def self.sizes
-     [
-       {"A4" => { width: 210, height: 297 }},
-       {"A3" => { width: 297, height: 420 }}
-     ]
-  end
+  field :size, :type => String, :in => self.paper_sizes.keys, :default => "A4"
+  field :layout, :type => String, :in => ["portrait", "landscape"], :default => "landscape"
 
   def max_cols
     columns = []

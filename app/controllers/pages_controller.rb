@@ -10,6 +10,16 @@ class PagesController < ApplicationController
   def show
     @lines = @page.lines
 
+    respond_to do |format|
+      format.html
+      format.pdf do
+        options = { page_size: @page.size, page_layout: @page.layout.to_sym }
+        pdf = CoderingsstrokenPdf.new(@page, view_context, options)
+        send_data pdf.render, filename:
+        "#{@page.project_number}_#{@page.title}_#{@page.created_at.strftime("%d/%m/%Y")}.pdf",
+        type: "application/pdf"
+      end
+    end
   end
 
   # GET /pages/new
@@ -76,6 +86,6 @@ class PagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def page_params
-      params.require(:page).permit(:title, :num_of_lines)
+      params.require(:page).permit(:title, :num_of_lines, :layout, :size, :project_number)
     end
 end

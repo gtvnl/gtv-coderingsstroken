@@ -7,8 +7,10 @@
 <table>
   <thead>
     <tr>
+      <th>Project nummer</th>
       <th>Naam</th>
       <th>Formaat</th>
+      <th>Layout</th>
       <th colspan="2">Regels</th>
     </tr>
   </thead>
@@ -16,8 +18,10 @@
   <tbody>
     <% @pages.each do |page| %>
       <tr>
+        <td><%= page.project_number %></td>
         <td><%= page.title %></td>
         <td><%= page.size %></td>
+        <td><%= page.layout %></td>
         <td><%= link_to page.lines.count, page_lines_path(page) %></td>
         <td>
 

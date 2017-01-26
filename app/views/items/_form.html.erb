@@ -1,22 +1,43 @@
 <% breadcrumb :item, @item %>
 
+<% unless @item.new_record? %>
+  <%= simple_form_for([@page, @line, @item]) do |f| %>
+    <%= f.error_notification %>
 
-<%= simple_form_for([@page, @line, @item]) do |f| %>
-  <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :number, label: 'Nummer' %>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :number, label: 'Nummer' %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :title, label: 'Naam' %>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :title, label: 'Naam' %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :modulen, as: :integer, label: 'Aantal Modulen' %>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :width, label: 'Breedte (mm)' %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit,"#{f.object.new_record? ? 'Maak' : 'Wijzig'}" %>
+    </div>
+  <% end %>
+<% else %>
+  <%= simple_form_for(@item, url: page_line_items_path) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-actions">
-    <%= f.button :submit,"#{f.object.new_record? ? 'Maak' : 'Wijzig'}" %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :number, label: 'Nummer', input_html: { value: @line.items.size + 1 } %>
+    </div>
+
+    <div class="form-inputs">
+      <%= f.input :title, label: 'Naam' %>
+    </div>
+
+    <div class="form-inputs">
+      <%= f.input :modulen, label: 'Aantal Modulen' %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit,"#{f.object.new_record? ? 'Maak' : 'Wijzig'}" %>
+    </div>
+  <% end %>
 <% end %>

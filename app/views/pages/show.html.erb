@@ -1,17 +1,28 @@
 <% breadcrumb :page, @page %>
 
+<div class="primary callout" data-closable>
+  <h5>Formaat: <%= @page.size %><br />
+  Layout: <%= @page.layout %></h5>
+  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <p id="notice"><%= notice %></p>
 
 <table>
   <thead>
     <tr>
-      <th colspan="<%= @page.max_cols + 1 %>"><h3><%= link_to @page.title, edit_page_path(@page) %></h3></th>
+      <th><h3><%= link_to @page.title, edit_page_path(@page) %></h3></th>
+
+      <th colspan="<%= @page.max_cols %>"></th>
+
     </tr>
   </thead>
   <tbody>
     <% @lines.each do |line| %>
     <tr>
-      <td><%= link_to line.number, edit_page_line_path(@page, line) %></td>
+      <td><%= link_to line.number, page_line_items_path(@page, line) %></td>
 
       <% line.items.each do |item| %>
         <td><%= link_to item.title,  edit_page_line_item_path(@page, line, item) %></td>
@@ -25,3 +36,4 @@
 <%= link_to 'Terug', pages_path %> |
 
 <!-- <%= link_to 'Print', 'javascript:print()' %> -->
+<%= link_to "Maak PDF", page_path(@page, :format => 'pdf') %>
