@@ -4,16 +4,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :number, label: 'Nummer', input_html: { value: "#{@page.lines.count + 1}" } if params[:action] == "new" %>
-    <%= f.input :number, label: 'Nummer' if params[:action] == "edit" %>
+    <%= f.input :number, as: :integer, label: 'Nummer', input_html: { value: "#{@page.lines.count + 1}" } if params[:action] == "new" %>
+    <%= f.input :number, as: :integer, label: 'Nummer' if params[:action] == "edit" %>
   </div>
 
   <div class="form-inputs">
-    <%= f.input :num_of_modules, label: 'Aantal modulen' %>
+    <%= f.input :num_of_modules, as: :integer, label: 'Aantal modulen' %>
   </div>
 
   <div class="form-inputs">
-    <%= f.input :height, label: 'Hoogte (mm)' %>
+    <%= f.input :height, as: :integer, label: 'Hoogte (mm)' %>
   </div>
 
   <div class="form-actions">

@@ -51,7 +51,7 @@ class LinesController < ApplicationController
         end
       end
 
-      redirect_to page_lines_url, notice: 'Line was successfully updated.'
+      redirect_to page_lines_url, notice: 'Regel gewijzigd.'
     else
       render :edit
     end
@@ -60,7 +60,7 @@ class LinesController < ApplicationController
   # DELETE /lines/1
   def destroy
     @line.destroy
-    redirect_to page_lines_url, notice: 'Line was successfully destroyed.'
+    redirect_to page_lines_url, notice: 'Regel verwijderd.'
   end
 
   private

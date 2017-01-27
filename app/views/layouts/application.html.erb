@@ -16,10 +16,18 @@
   <body>
     <%= render 'default/top_bar' %>
     <%= render 'default/breadcrumbs' %>
-    <div class="row">
 
-    <%= yield %>
+    <div class="row">
+      <%= display_flash_messages %>
+      <%= yield %>
 
     </div>
+    <footer>
+      <div class="row">
+        <div class="small-3 small-centered columns">
+            <%= "#{params[:controller]}##{params[:action]}"  %>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

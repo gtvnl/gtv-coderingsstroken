@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-
     @items = Item.where(line_id: params[:line_id]).order_by(number: :asc)
   end
 
@@ -30,7 +29,7 @@ class ItemsController < ApplicationController
     @item.line = @line
 
     if @item.save
-      redirect_to page_line_items_url, notice: 'Item was successfully created.'
+      redirect_to page_line_items_url, notice: 'Module aangemaakt.'
     else
       render :new
     end
@@ -38,8 +37,14 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1
   def update
+    @index = @line.items.index(@item)
+    @num_of_modules = @line.num_of_modules
+
+
+
     if @item.update(item_params)
-      redirect_to page_line_item_path(@page, @line, @item), notice: 'Item was successfully updated.'
+
+      redirect_to page_line_item_path(@page, @line, @item), notice: 'Module gewijzigd.'
     else
       render :edit
     end
@@ -48,7 +53,20 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     @item.destroy
-    redirect_to page_line_items_url, notice: 'Item was successfully destroyed.'
+
+    # num_of_modules = @line.num_of_modules
+    #
+    # if num_of_modules < 12
+    #   diff = 12 - num_of_modules
+    #
+    #   num = [1,2,3,4,5,6,7,8,9,10,11,12] - @line.items.select.pluck(:number)
+    #
+    #   diff.times do
+    #     item = Item.create(line: @line, number: num[0], title: "")
+    #   end
+    # end
+
+    redirect_to page_line_items_url, notice: 'Module verwijderd.'
   end
 
   private
@@ -61,6 +79,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:title, :number, :modulen, :line)
+      params.require(:item).permit(:title, :number, :modulen, :line, :description)
     end
 end

@@ -1,0 +1,22 @@
+<%= f.error_notification %>
+
+<div class="form-inputs">
+  <%= f.input :number, as: :integer, label: 'Nummer', input_html: { value: "#{@line.items.count + 1}" } if params[:action] == "new" %>
+  <%= f.input :number, as: :integer, label: 'Nummer' if params[:action] == "edit" %>
+</div>
+
+<div class="form-inputs">
+  <%= f.input :title, label: 'Naam' %>
+</div>
+
+<div class="form-inputs">
+  <%= f.input :description, label: 'Omschrijving' %>
+</div>
+
+<div class="form-inputs">
+  <%= f.input :modulen, as: :integer, as: :integer, label: 'Aantal Modulen' %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit,"#{f.object.new_record? ? 'Maak' : 'Wijzig'}" %>
+</div>

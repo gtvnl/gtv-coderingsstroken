@@ -12,6 +12,7 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'simple_form'
 gem 'foundation-rails'
+gem 'foundation_rails_helper', '>= 3.0.0.rc2', '< 4.0'
 gem 'foundation-icons-sass-rails'
 gem 'gretel'
 

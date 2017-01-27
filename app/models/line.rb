@@ -4,8 +4,7 @@ class Line
   include Sizeable
 
   belongs_to :page
-
-  has_many :items, dependent: :delete
+  has_many :items, dependent: :destroy
 
   field :number, default: 1, required: true
   field :modules

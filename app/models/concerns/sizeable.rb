@@ -3,7 +3,7 @@ module Sizeable
 
   module ClassMethods
     def max_aantal_modulen
-      14
+      12
     end
 
     def line_height

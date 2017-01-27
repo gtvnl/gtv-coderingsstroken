@@ -4,7 +4,6 @@ class CoderingsstrokenPdf < Prawn::Document
 
   def initialize(page, view, options)
     super(options)
-    # , page_size: @page.size, page_layout: @page.layout
     @page = page
     @view = view
     logo
@@ -15,16 +14,43 @@ class CoderingsstrokenPdf < Prawn::Document
     logopath =  "#{Rails.root}/app/assets/images/gtv.png"
     image logopath, :width => 83, :height => 55
     move_down 10
-    draw_text @page.project_number, :at => [220, 775], size: 22
+    draw_text "#{@page.project_number} - #{@page.title}", :at => [100, 490], size: 22 if @page.layout == 'landscape'
   end
 
   def draw_table
     @page.lines.each do |line|
       widths = Item.where(line: line).collect.pluck(:width_in_mm)
-      data = Item.where(line: line).collect.pluck(:title)
+
+      titles = Item.where(line: line).collect.pluck(:title)
+      descriptions = Item.where(line: line).collect.pluck(:description)
+
       widths.unshift(8.mm)
-      data.unshift(line.number)
-      table([data], cell_style: {height: line.height_in_mm }, column_widths: widths)
+
+      titles.unshift("")
+      descriptions.unshift(line.number)
+
+        table([descriptions],
+        cell_style: {
+            height: line.height_in_mm / 2,
+            overflow: :truncate,
+            align: :center,
+            valign: :bottom,
+            :border_lines => [:dotted, :solid, :dotted, :dotted]
+          },
+          column_widths: widths
+          )
+
+          table([titles],
+          cell_style: {
+              height: line.height_in_mm / 2,
+              overflow: :truncate,
+              align: :center,
+              valign: :bottom,
+              :border_lines => [:dotted, :solid, :solid, :dotted]
+            },
+            column_widths: widths
+            )
+
     end
   end
 

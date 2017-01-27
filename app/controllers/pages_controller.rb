@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   def show
-    @lines = @page.lines
+    @lines = @page.lines.order_by(number: :asc)
 
     respond_to do |format|
       format.html
