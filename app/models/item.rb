@@ -12,7 +12,7 @@ class Item
 
   field :number, type: Integer, default: 1
 
-  field :modulen, type: Integer, default: 1
+  field :modulen, type: Float, default: 1
 
   def width_in_mm
     modulen * Item.module_size.mm
