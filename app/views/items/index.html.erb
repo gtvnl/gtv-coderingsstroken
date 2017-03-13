@@ -17,14 +17,12 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.number %></td>
-        <td><%= item.title %></td>
+        <td><%= link_to item.number, edit_page_line_item_path(item.line.page,item.line,item) %></td>
+        <td><%= link_to item.title, edit_page_line_item_path(item.line.page,item.line,item) %></td>
         <td><%= item.description %></td>
         <td><%= item.modulen %></td>
         <td><%= item.line.number %></td>
         <td>
-          <%= link_to page_line_item_path(item.line.page,item.line,item) do %><i class="fi-eye"></i><% end %>
-          <%= link_to edit_page_line_item_path(item.line.page,item.line,item) do %><i class="fi-pencil"></i><% end %>
           <%= link_to page_line_item_path(item.line.page,item.line,item), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fi-trash"></i><% end %>
         </td>
       </tr>
