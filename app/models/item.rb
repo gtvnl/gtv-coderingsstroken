@@ -3,9 +3,6 @@ class Item
   include NoBrainer::Document::Timestamps
   include Sizeable
 
-
-  validate { errors.add(:modulen, "Een regel kan maximaal #{Item.max_aantal_modulen} modulen hebben.") if self.too_many_modules? }
-
   belongs_to :line
 
   has_one :page, through: :line
@@ -21,8 +18,6 @@ class Item
     modulen * Item.module_size.mm
   end
 
-  def too_many_modules?
-    self.line.num_of_modules + self.modulen  > Item.max_aantal_modulen
-  end
+
 
 end
