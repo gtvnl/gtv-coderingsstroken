@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
 
     if @item.update(item_params)
 
-      redirect_to page_line_item_path(@page, @line, @item), notice: 'Module gewijzigd.'
+      redirect_to page_line_items_url, notice: 'Module gewijzigd.'
     else
       render :edit
     end

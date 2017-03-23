@@ -27,14 +27,12 @@ class LinesController < ApplicationController
     @line = Line.new(line_params)
     @page = Page.find(params[:page_id])
     @line.page = @page
-
+    @count = params[:line][:num_of_modules].to_i || 1
     if @line.save
-      if @line.items.count == 0
-        12.times do |i|
-          item = Item.create(line: @line, number: i + 1)
-        end
+      @count.times do |i|
+        item = Item.create(line: @line, number: i + 1)
       end
-      redirect_to page_lines_url, notice: 'Regel aangemaakt.'
+    redirect_to page_lines_url, notice: 'Regel aangemaakt.'
     else
       render :new
     end
